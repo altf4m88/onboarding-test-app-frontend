@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "My Custom Title", // Update the title here
+  title: "Cat Facts App", // Update the title here
   description: "Description of your app",
   icons: {
     icon: "/images/logo.webp", // Path to your favicon
