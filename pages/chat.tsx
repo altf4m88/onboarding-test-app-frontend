@@ -34,11 +34,31 @@ const Chat: React.FC = () => {
         setGatoChats(prevFacts => [...prevFacts, responseData]); // Append new facts to existing ones
       } else {
         // Handle error
-        console.error('Failed to fetch cat facts');
+        console.error('Failed to fetch response');
       }
     };
+
+    const fetchChatHistory = async () => {
+        const token = localStorage.getItem('token');
+        const response = await fetch('http://localhost:3000/gato-chats', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+    
+        if (response.ok) {
+            const chatHistory: GatoChat[] = await response.json();
+            setGatoChats(chatHistory);
+        } else {
+          // Handle error
+          console.error('Failed to fetch response');
+        }
+    }
   
     useEffect(() => {
+        fetchChatHistory();
     }, []);
   
     return (
@@ -48,13 +68,21 @@ const Chat: React.FC = () => {
                 <Image className='cat-profile-picture' src={catImage} alt="Cat" height={300} />
                 <h1>CatGPT</h1>
             </div>
-            <Box sx={{ width: '50%', maxWidth: 1000, margin: 'auto', mt: 5, mb: 5 }}>
-                <List>
+            <Box sx={{ width: '75%', maxWidth: 1000, margin: 'auto', mt: 5, mb: 5 }}>
+                <List sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                     {gatoChats.map((chat, index) => (
-                        <ListItem key={index}>
+                        chat.role === 'user' 
+                        ?  <ListItem sx={{ width: '50%', alignSelf: 'flex-end'}} key={index}>
+                                <ListItemText 
+                                    primary={chat.message} 
+                                    sx={{ backgroundColor:  "#F5D460", padding: 2, borderRadius: 4 }}
+                                />
+                            </ListItem>
+                        :
+                        <ListItem sx={{ width: '50%'}} key={index}>
                             <ListItemText 
                                 primary={chat.message} 
-                                sx={{ textAlign: chat.role === 'user' ? 'right' : 'left', backgroundColor: "#F5D460", padding: 2, borderRadius: 4 }}
+                                sx={{ backgroundColor: "#B7F3F9", padding: 2, borderRadius: 4 }}
                             />
                         </ListItem>
                     ))}
@@ -67,7 +95,7 @@ const Chat: React.FC = () => {
                         placeholder="Type your message..."
                     />
                     <Button onClick={handleGatoChats}  sx={{ p: 2 }}>
-                        <SendIcon />
+                        <SendIcon sx={{ color : "#F5D460"}} />
                     </Button>
                 </Box>
             </Box>
