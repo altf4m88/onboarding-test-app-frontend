@@ -37,6 +37,11 @@ const Navbar: React.FC = () => {
               }
               {isAuthenticated && 
               <li>
+                <Link className='nav-link' href="/chat">CatGPT</Link>
+              </li>
+              }
+              {isAuthenticated && 
+              <li>
                 <button className='btn btn-danger' onClick={handleLogout}>Logout</button>
               </li>
               }

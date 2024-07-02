@@ -31,7 +31,7 @@ const Chat: React.FC = () => {
             message : inputMessage
         }]);
         const responseData = await response.json();
-        setGatoChats(prevFacts => [...prevFacts, responseData]); // Append new facts to existing ones
+        setGatoChats(prevFacts => [...prevFacts, responseData]);
       } else {
         // Handle error
         console.error('Failed to fetch response');
