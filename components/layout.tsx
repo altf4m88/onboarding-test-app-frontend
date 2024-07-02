@@ -7,7 +7,7 @@ const Layout: React.FC = ({ children }) => {
       <Head>
         <title>Cat Facts</title>
         <meta name="description" content="Cat facts application" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="../images/logo.webp" />
       </Head>
       <Navbar />
       <main>{children}</main>

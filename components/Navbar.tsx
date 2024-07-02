@@ -18,14 +18,38 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav>
-      <ul>
-        <li><Link href="/">Home</Link></li>
-        {!isAuthenticated && <li><Link href="/register">Register</Link></li>}
-        {!isAuthenticated && <li><Link href="/login">Login</Link></li>}
-        {isAuthenticated && <li><button onClick={handleLogout}>Logout</button></li>}
-      </ul>
-    </nav>
+    <>
+      <nav className="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <div className="container-fluid">
+          <a className="navbar-brand" href="#">Navbar</a>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarColor01">
+            <ul className="navbar-nav me-auto">
+              <li className="nav-item">
+                <Link className="nav-link" href="/">Home</Link>
+              </li>
+              {!isAuthenticated && 
+              <li className="nav-item">
+                <Link className="nav-link" href="/register">Register</Link>
+              </li>
+              }
+              {!isAuthenticated && 
+              <li className="nav-item">
+                <Link className='nav-link' href="/login">Login</Link>
+              </li>
+              }
+              {isAuthenticated && 
+              <li>
+                <button className='btn btn-danger' onClick={handleLogout}>Logout</button>
+              </li>
+              }
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </>
   );
 };
 
