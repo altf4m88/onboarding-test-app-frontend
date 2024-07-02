@@ -1,7 +1,6 @@
 "use client"; // Add this line at the top
 
 import { useEffect, useState } from 'react';
-import Navbar from '../components/Navbar';
 import ProtectedRoute from '../components/ProtectedRoute';
 import Image from 'next/image';
 import catImage from '../public/images/main.png'; // Import your local image

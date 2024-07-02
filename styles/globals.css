@@ -53,3 +53,9 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
+.cat-profile-picture {
+  border-radius: 50%;
+  max-width: 100px;
+  max-height: 100px;
+}
