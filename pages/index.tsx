@@ -41,13 +41,13 @@ const Home: React.FC = () => {
     <ProtectedRoute>
       <div className="container">
         <h1>Cat Facts</h1>
-        <Image src={catImage} alt="Cat" height={300} /> {/* Local image */}
+        <Image src={catImage} alt="Cat" height={300} />
+        <button onClick={fetchCatFacts}>Get New Cat Facts</button>
         {catFacts.map((fact) => (
           <div key={fact._id} className="cat-fact">
             {fact.text}
           </div>
         ))}
-        <button onClick={fetchCatFacts}>Get New Cat Facts</button>
       </div>
     </ProtectedRoute>
   );

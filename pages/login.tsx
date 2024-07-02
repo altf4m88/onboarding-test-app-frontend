@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import Navbar from '../components/Navbar';
+import { useAuth } from '@/context/AuthContext';
 
 const Login: React.FC = () => {
   const router = useRouter();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const { login } = useAuth();
 
   const handleLogin = async () => {
     const response = await fetch('http://localhost:3000/auth/login', {
@@ -19,6 +20,7 @@ const Login: React.FC = () => {
     if (response.ok) {
       const data = await response.json();
       localStorage.setItem('token', data.access_token);
+      login();
       router.push('/');
     } else {
       // Handle error
@@ -27,22 +29,28 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={handleLogin}>Login</button>
+    <div className='container'>
+      <div className='h-50 w-50 d-flex flex-column gap-2 mt-5'>
+        <h1>Login</h1>
+        <p>Get your daily silly cat facts</p>
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          className='form-control'
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          className='form-control'
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button onClick={handleLogin}>Login</button>
+      </div>
     </div>
+    
   );
 };
 

@@ -1,19 +1,14 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 
 const Navbar: React.FC = () => {
   const router = useRouter();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    setIsAuthenticated(!!token);
-  }, []);
+  const {isAuthenticated, logout} = useAuth();
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    setIsAuthenticated(false);
+    logout();
     router.push('/login');
   };
 
@@ -21,7 +16,7 @@ const Navbar: React.FC = () => {
     <>
       <nav className="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">Navbar</a>
+          <a className="navbar-brand" href="#">CatFacts</a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
